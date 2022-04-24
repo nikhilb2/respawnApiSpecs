@@ -98,9 +98,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InventoryItem'
+                type: object
+                properties:
+                  _metadata:
+                    $ref: '#/components/schemas/Metadata'
+                  items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/InventoryItem'
         '400':
           description: bad input parameter
     post:
@@ -220,3 +225,19 @@ components:
                   type: string
                   example: with airpods
                 
+    Metadata: 
+      type: object
+      required:
+        - count
+        - offset
+        - limit
+      properties:
+        count:
+          type: integer
+          example: 50
+        offset:
+          type: integer
+          example: 0
+        limit:
+          type: integer
+          example: 10
