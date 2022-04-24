@@ -139,7 +139,19 @@ components:
             name:
               type: string
               example: Apple
-        variants:
+        shortDescription:
+          type: string
+          example: this is a short description
+        longDescription:
+          type: string
+          example: <div>this is a very long discription in html format</div>
+        price:
+          type: integer
+          example: 400
+        offer:
+          type: integer
+          example: 300
+        size:
             type: array
             items: 
               properties:
@@ -147,23 +159,41 @@ components:
                   type: string
                   format: uuid
                   example: 507f1f77bcf86cd799439011
-                color:
-                  type: string
-                  example: GREEN
                 price:
                   type: integer
                   example: 400
-                offer:
-                  type: integer
-                  example: 300
                 name:
                   type: string
-                  example: Iphone 13 512GB Green
-                shortDescription:
+                  example: 512GB
+        colors:
+            type: array
+            items: 
+              properties:
+                id:
                   type: string
-                  example: this is a short description
-                longDescription:
+                  format: uuid
+                  example: 507f1f77bcf86cd799439011
+                price:
+                  type: integer
+                  example: 400
+                name:
                   type: string
-                  example: <div>this is a very long discription in html format</div>
-                  
+                  example: Black
+                color:
+                  type: string
+                  example: '#000000'
+        styles:
+            type: array
+            items: 
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  example: 507f1f77bcf86cd799439011
+                price:
+                  type: integer
+                  example: 400
+                name:
+                  type: string
+                  example: with airpods
                 
