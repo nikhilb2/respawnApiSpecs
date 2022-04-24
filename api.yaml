@@ -18,6 +18,29 @@ tags:
   - name: developers
     description: Operations available to regular developers
 paths:
+  /inventory/{id}:
+      get:
+        tags:
+          - developers
+        description: Returns a user based on a single ID, if the user does not have access to the inventory
+        operationId: findInventoryById
+        parameters:
+          - name: id
+            in: path
+            description: ID of pet to fetch
+            required: true
+            schema: 
+              type: string
+              example: iphone-13
+        responses:
+          '200':
+            description: search results matching criteria
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/InventoryItem'
+          '400':
+            description: bad input parameter
   /inventory:
     get:
       tags:
@@ -115,7 +138,7 @@ components:
         id:
           type: string
           format: uuid
-          example: 507f1f77bcf86cd799439011
+          example: iphone-13
         name:
           type: string
           example: Iphone 13
@@ -135,7 +158,7 @@ components:
             id:
               type: string
               format: uuid
-              example: 507f1f77bcf86cd799439011
+              example: apple
             name:
               type: string
               example: Apple
@@ -158,7 +181,7 @@ components:
                 id:
                   type: string
                   format: uuid
-                  example: 507f1f77bcf86cd799439011
+                  example: iphone-13-512gb
                 price:
                   type: integer
                   example: 400
@@ -172,7 +195,7 @@ components:
                 id:
                   type: string
                   format: uuid
-                  example: 507f1f77bcf86cd799439011
+                  example: iphone-13-black
                 price:
                   type: integer
                   example: 400
@@ -189,7 +212,7 @@ components:
                 id:
                   type: string
                   format: uuid
-                  example: 507f1f77bcf86cd799439011
+                  example: iphone-13-with-airpods
                 price:
                   type: integer
                   example: 400
