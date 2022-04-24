@@ -147,6 +147,14 @@ components:
         name:
           type: string
           example: Iphone 13
+        mainImage:
+          type: string
+          example: abc.jpg
+        images:
+          type: array
+          items:
+            example: abc.jpg
+              
         createdOn:
           type: string
           format: date-time
