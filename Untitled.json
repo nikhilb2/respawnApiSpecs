@@ -1,0 +1,203 @@
+{
+  "uuid": "0394f135-ac8a-4650-a6ab-71ea6d025c22",
+  "lastMigration": 19,
+  "name": "Respawn API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "988b086b-efc4-4b8e-866c-eeab764a2ff9",
+      "documentation": "Returns a user based on a single ID, if the user does not have access to the inventory",
+      "method": "get",
+      "endpoint": "inventory/:id",
+      "responses": [
+        {
+          "uuid": "8d26a767-5154-4362-9e63-8b2a401746a2",
+          "body": "{\n  \"id\": \"iphone-13\",\n  \"name\": \"Iphone 13\",\n  \"mainImage\": \"abc.jpg\",\n  \"images\": [\n    \"abc.jpg\"\n  ],\n  \"createdOn\": \"2016-08-29T09:12:33.001Z\",\n  \"currency\": \"USD\",\n  \"isFavorite\": true,\n  \"manufacturer\": {\n    \"id\": \"apple\",\n    \"name\": \"Apple\"\n  },\n  \"shortDescription\": \"this is a short description\",\n  \"longDescription\": \"<div>this is a very long discription in html format</div>\",\n  \"price\": 400,\n  \"offer\": 300,\n  \"size\": [\n    {\n      \"id\": \"iphone-13-512gb\",\n      \"price\": 400,\n      \"name\": \"512GB\"\n    }\n  ],\n  \"colors\": [\n    {\n      \"id\": \"iphone-13-black\",\n      \"price\": 400,\n      \"name\": \"Black\",\n      \"color\": \"#000000\"\n    }\n  ],\n  \"styles\": [\n    {\n      \"id\": \"iphone-13-with-airpods\",\n      \"price\": 400,\n      \"name\": \"with airpods\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "search results matching criteria",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "c3c1a20a-e069-4320-8141-c2723b9456ec",
+          "body": "",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "bad input parameter",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "34bca133-c793-4cde-b0ec-230b459914d7",
+      "documentation": "searches inventory",
+      "method": "get",
+      "endpoint": "inventory",
+      "responses": [
+        {
+          "uuid": "ed6f81ff-b42b-4578-bcfd-fdebd581eab8",
+          "body": "{\n  \"_metadata\": {\n    \"count\": 50,\n    \"offset\": {{faker 'datatype.number'}},\n    \"limit\": {{queryParam 'limit' '10'}}\n  },\n  \"items\": [\n    {{#repeat (queryParam 'limit' '10')}}\n    {\n      \"id\": \"{{faker 'lorem.slug'}}\",\n      \"name\": \"{{faker 'commerce.productName'}}\",\n      \"mainImage\": \"http://placeimg.com/640/480/tech?random={{faker 'lorem.slug'}}\",\n      \"images\": [\n        {{#repeat (faker 'datatype.number' min=0 max=2)}}\n        \"http://placeimg.com/640/480/tech?random={{faker 'lorem.slug'}}\"\n        {{/repeat}}\n      ],\n      \"createdOn\": \"{{faker 'date.past'}}\",\n      \"currency\": \"USD\",\n      \"isFavorite\": true,\n      \"manufacturer\": {\n        \"id\": \"{{faker 'lorem.slug'}}\",\n        \"name\": \"{{faker 'company.companyName'}}\"\n      },\n      \"shortDescription\": \"<div><h1>{{faker 'lorem.words'}}</h1><p>{{faker 'lorem.sentence'}}</p></div>\",\n      \"longDescription\": \"<div><h1>{{faker 'lorem.words'}}</h1><p>{{faker 'commerce.productDescription'}}</p></div>\",\n      \"price\": {{faker 'datatype.number' min=10 max=10000 }},\n      \"offer\": {{faker 'datatype.number' min=10 max=10000 }},\n      \"size\": [\n        {{#repeat (faker 'datatype.number' min=0 max=2)}}\n        {\n          \"id\": \"{{faker 'lorem.slug'}}\",\n          \"price\": {{faker 'datatype.number' min=10 max=10000 }},\n          \"name\": \"{{oneOf (array '128' '256' '512') }}GB\"\n        }\n        {{/repeat}}\n      ],\n      \"colors\": [\n        {{#repeat (faker 'datatype.number' min=0 max=2)}}\n        {\n          \"id\": \"{{faker 'lorem.slug'}}\",\n          \"price\": {{faker 'datatype.number' min=10 max=10000 }},\n          \"name\": \"{{faker 'commerce.color'}}\",\n          \"color\": \"{{faker 'internet.color'}}\",\n        }\n        {{/repeat}}\n      ],\n      \"styles\": [\n        {{#repeat (faker 'datatype.number' min=0 max=2)}}\n        {\n          \"id\": \"{{faker 'lorem.slug'}}\",\n          \"price\": {{faker 'datatype.number' min=10 max=10000 }},\n          \"name\": \"with airpods\"\n        }\n        {{/repeat}}\n      ]\n    }\n    {{/repeat}}\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "search results matching criteria",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "b1cd027c-5d74-481b-9fbb-4a44417087d4",
+          "body": "",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "bad input parameter",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "ff8a6003-40b2-429d-8420-8954bf41ab17",
+      "documentation": "adds an inventory item",
+      "method": "post",
+      "endpoint": "inventory",
+      "responses": [
+        {
+          "uuid": "b8babe2f-91f6-406e-9001-64aa187fae10",
+          "body": "",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "item created",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "4ec969df-ae04-43c6-8d01-329ce71466f9",
+          "body": "",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "invalid input, object invalid",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "d3b4f404-4c5b-4796-bfae-a97bd9f0a3c6",
+          "body": "",
+          "latency": 0,
+          "statusCode": 409,
+          "label": "an existing item already exists",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
